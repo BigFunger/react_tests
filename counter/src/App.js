@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
+import './components/toggle_todo';
+import './components/counter_list';
 
 class App extends React.Component {
   render = () => {
