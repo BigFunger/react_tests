@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import './reducers/todo';
 
 const defaultState = {
   counter: 0
