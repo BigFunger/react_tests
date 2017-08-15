@@ -53,15 +53,7 @@ export class App extends React.Component {
             });
           }}
         />
-        <Footer
-          visibilityFilter={visibilityFilter}
-          onFilterClick={filter => {
-            store.dispatch({
-              type: 'SET_VISIBILITY_FILTER',
-              filter
-            });
-          }}
-        />
+        <Footer />
       </div>
     );
   }

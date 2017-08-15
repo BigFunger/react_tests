@@ -1,40 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from './link';
+import { store } from '../store';
 
 export class FilterLink extends React.Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => 
+      this.forceUpdate()
+    );
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   render = () => {
     const {
-      children,
+      visibilityFilter
+    } = store.getState();
+    const {
       filter,
-      currentFilter,
-      onClick
+      children
     } = this.props;
     
-    if (currentFilter === filter) {
-      return (
-        <span>
-          {children}
-        </span>
-      );
-    }
-    
     return (
-      <a
-        href='#'
-        onClick={e => {
-          e.preventDefault();
-          onClick(filter);
+      <Link
+        active={ filter === visibilityFilter }
+        onClick={() => {
+          store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter
+          });
         }}
       >
-        {children}
-      </a>
+        { children }
+      </Link>
     );
   }
 
   static propTypes = {
     filter: PropTypes.string,
-    currentFilter: PropTypes.string,
-    onClick: PropTypes.func,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
