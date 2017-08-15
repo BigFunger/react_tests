@@ -1,40 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FilterLink } from './filter_link';
 
 export class Footer extends React.Component {
   render = () => {
-    const { store } = this.props;
-
     return (
       <p>
         Show:
         {' '}
-        <FilterLink
-          store={store}
-          filter='SHOW_ALL'
-        >
+        <FilterLink filter='SHOW_ALL'>
           All
         </FilterLink>
         {' '}
-        <FilterLink
-          store={store}
-          filter='SHOW_ACTIVE'
-        >
+        <FilterLink filter='SHOW_ACTIVE'>
           Active
         </FilterLink>
         {' '}
-        <FilterLink
-          store={store}
-          filter='SHOW_COMPLETED'
-        >
+        <FilterLink filter='SHOW_COMPLETED'>
           Completed
         </FilterLink>
       </p>
     );
-  }
-
-  static propTypes = {
-    store: PropTypes.object
   }
 }

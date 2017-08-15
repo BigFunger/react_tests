@@ -4,7 +4,7 @@ import { Link } from './link';
 
 export class FilterLink extends React.Component {
   componentDidMount() {
-    const { store } = this.props;
+    const { store } = this.context;
     this.unsubscribe = store.subscribe(() => 
       this.forceUpdate()
     );
@@ -15,8 +15,8 @@ export class FilterLink extends React.Component {
   }
 
   render = () => {
+    const { store } = this.context;
     const {
-      store,
       filter,
       children
     } = this.props;
@@ -40,11 +40,14 @@ export class FilterLink extends React.Component {
   }
 
   static propTypes = {
-    store: PropTypes.object,
     filter: PropTypes.string,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
     ])
+  }
+
+  static contextTypes = {
+    store: PropTypes.object
   }
 }

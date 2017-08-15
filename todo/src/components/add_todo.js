@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 let nextTodoId = 0;
 export class AddTodo extends React.Component {
   render = () => {
-    const {
-      store
-    } = this.props;
-
+    const { store } = this.context;
     let input;
 
     // TODO: Find out about ref, this looks like two way binding...
@@ -30,7 +27,7 @@ export class AddTodo extends React.Component {
     );
   }
 
-  static propTypes = {
+  static contextTypes = {
     store: PropTypes.object
   }
 }
