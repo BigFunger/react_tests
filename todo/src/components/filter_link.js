@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { store } from '../store';
 
 export class FilterLink extends React.Component {
   render = () => {
     const {
       children,
       filter,
-      currentFilter
+      currentFilter,
+      onClick
     } = this.props;
     
     if (currentFilter === filter) {
@@ -23,10 +23,7 @@ export class FilterLink extends React.Component {
         href='#'
         onClick={e => {
           e.preventDefault();
-          store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter
-          });
+          onClick(filter);
         }}
       >
         {children}
@@ -37,6 +34,7 @@ export class FilterLink extends React.Component {
   static propTypes = {
     filter: PropTypes.string,
     currentFilter: PropTypes.string,
+    onClick: PropTypes.func,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
