@@ -1,12 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { store } from '../store';
 
+let nextTodoId = 0;
 export class AddTodo extends React.Component {
   render = () => {
-    const {
-      onAddClick
-    } = this.props;
-
     let input;
 
     // TODO: Find out about ref, this looks like two way binding...
@@ -16,8 +13,10 @@ export class AddTodo extends React.Component {
           input = node;
         }} />
         <button onClick={() => {
-          onAddClick({
-            text: input.value
+          store.dispatch({
+            type: 'ADD_TODO',
+            text: input.value,
+            id: nextTodoId++
           });
           input.value = '';
         }}>
@@ -25,9 +24,5 @@ export class AddTodo extends React.Component {
         </button>
       </div>
     );
-  }
-
-  static propTypes = {
-    onAddClick: PropTypes.func
   }
 }
