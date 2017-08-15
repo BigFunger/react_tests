@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TodoList } from './todo_list';
-import { store } from '../store';
 
 const getVisibleTodos = (todos, filter) => {
   switch(filter) {
@@ -17,6 +17,7 @@ const getVisibleTodos = (todos, filter) => {
 
 export class VisibleTodoList extends React.Component {
   componentDidMount() {
+    const { store } = this.props;
     this.unsubscribe = store.subscribe(() =>
       this.forceUpdate()
     );
@@ -27,6 +28,9 @@ export class VisibleTodoList extends React.Component {
   }
 
   render = () => {
+    const {
+      store
+    } = this.props;
     const {
       todos,
       visibilityFilter
@@ -48,5 +52,9 @@ export class VisibleTodoList extends React.Component {
         }}
       />
     );
+  }
+
+  static propTypes = {
+    store: PropTypes.object
   }
 }

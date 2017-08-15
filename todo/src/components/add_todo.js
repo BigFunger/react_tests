@@ -1,9 +1,13 @@
 import React from 'react';
-import { store } from '../store';
+import PropTypes from 'prop-types';
 
 let nextTodoId = 0;
 export class AddTodo extends React.Component {
   render = () => {
+    const {
+      store
+    } = this.props;
+
     let input;
 
     // TODO: Find out about ref, this looks like two way binding...
@@ -24,5 +28,9 @@ export class AddTodo extends React.Component {
         </button>
       </div>
     );
+  }
+
+  static propTypes = {
+    store: PropTypes.object
   }
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from './link';
-import { store } from '../store';
 
 export class FilterLink extends React.Component {
   componentDidMount() {
+    const { store } = this.props;
     this.unsubscribe = store.subscribe(() => 
       this.forceUpdate()
     );
@@ -16,12 +16,13 @@ export class FilterLink extends React.Component {
 
   render = () => {
     const {
-      visibilityFilter
-    } = store.getState();
-    const {
+      store,
       filter,
       children
     } = this.props;
+    const {
+      visibilityFilter
+    } = store.getState();
     
     return (
       <Link
@@ -39,6 +40,7 @@ export class FilterLink extends React.Component {
   }
 
   static propTypes = {
+    store: PropTypes.object,
     filter: PropTypes.string,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
