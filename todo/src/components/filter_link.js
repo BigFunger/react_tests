@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { store } from '../store';
 
 export class FilterLink extends React.Component {

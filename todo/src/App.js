@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import { FilterLink } from './components/filter_link';
+import { TodoList } from './components/todo_list';
 
 import { store } from './store';
 
@@ -19,7 +20,7 @@ const getVisibleTodos = (todos, filter) => {
 };
 
 let nextTodoId = 0;
-class App extends React.Component {
+export class App extends React.Component {
   render = () => {
     const {
       todos,
@@ -46,27 +47,15 @@ class App extends React.Component {
         }}>
           Add Todo
         </button>
-        <ul>
-          {visibleTodos.map(todo => 
-            <li
-              key={todo.id}
-              onClick={() => {
-                store.dispatch({
-                  type: 'TOGGLE_TODO',
-                  id: todo.id
-                });
-              }}
-              style={{
-                textDecoration:
-                  todo.completed ?
-                    'line-through' :
-                    'none'
-              }}
-            >
-              {todo.text}
-            </li>
-          )}
-        </ul>
+        <TodoList
+          todos={visibleTodos}
+          onTodoClick={(id) => {
+            store.dispatch({
+              type: 'TOGGLE_TODO',
+              id
+            });
+          }}
+        />
         <p>
           Show:
           {' '}
@@ -99,6 +88,4 @@ class App extends React.Component {
     todos: PropTypes.array,
     visibilityFilter: PropTypes.string
   }
-}
-
-export default App;
+};
