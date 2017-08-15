@@ -8,6 +8,7 @@ const render = () => {
   ReactDOM.render(
     <App
       todos={ state.todos }
+      visibilityFilter={ state.visibilityFilter }
     />,
     document.getElementById('root')
   );
